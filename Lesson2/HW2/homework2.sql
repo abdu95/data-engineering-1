@@ -18,4 +18,4 @@ select * from birdstrikes where state IS NOT NULL AND bird_size IS NOT NULL AND 
 
 -- Exercise5 
 SELECT DATEDIFF(NOW(), (select flight_date from birdstrikes where WEEKOFYEAR(flight_date) = 52 AND state = 'Colorado'));  
--- Answer: 52
+-- Answer: 7580
