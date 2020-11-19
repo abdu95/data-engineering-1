@@ -99,7 +99,7 @@ CREATE TABLE order_items (
     CONSTRAINT order_items_ibfk_2 FOREIGN KEY (seller_id) REFERENCES sellers (seller_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = UTF8MB4;
 
--- loading CSV file into Sellers table
+-- loading CSV file into OrderItems table
 LOAD DATA INFILE 'c:/ProgramData/MySQL/MySQL Server 8.0/Uploads/olist_order_items_dataset.csv' 
 INTO TABLE order_items 
 FIELDS TERMINATED BY ',' 
@@ -109,5 +109,66 @@ IGNORE 1 LINES
 SET 
 shipping_limit_date = STR_TO_DATE(@v_shipping_limit_date, '%m/%d/%Y %H:%i');
 
--- current directory
-select @@datadir;
+DROP TABLE IF EXISTS order_payments;
+
+-- creating OrderPayments table 
+CREATE TABLE order_payments (
+	order_id VARCHAR(50) NOT NULL,
+    payment_sequential INT NOT NULL,
+    payment_type VARCHAR(50) NOT NULL,
+    payment_installments INT NOT NULL,
+    payment_value DECIMAL(7,2) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = UTF8MB4;
+
+-- loading CSV file into OrderPayments table
+LOAD DATA INFILE 'c:/ProgramData/MySQL/MySQL Server 8.0/Uploads/olist_order_payments_dataset.csv' 
+INTO TABLE order_payments 
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n' 
+IGNORE 1 LINES 
+(order_id, payment_sequential, payment_type, payment_installments, payment_value);
+
+DROP TABLE IF EXISTS orders;
+
+-- creating Orders table 
+CREATE TABLE orders (
+	order_id VARCHAR(50) NOT NULL,
+    customer_id VARCHAR(60) NULL,
+    order_status VARCHAR(50) NOT NULL,
+    order_purchase_timestamp DATETIME NOT NULL,
+    order_approved_at DATETIME NOT NULL,
+    order_estimated_delivery_date DATETIME NOT NULL,
+	PRIMARY KEY (order_id),
+    KEY customer_id (customer_id),
+    CONSTRAINT orders_ibfk_1 FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
+) ENGINE = InnoDB DEFAULT CHARSET = UTF8MB4;
+
+-- loading CSV file into Orders table
+LOAD DATA INFILE 'c:/ProgramData/MySQL/MySQL Server 8.0/Uploads/olist_orders_dataset.csv' 
+INTO TABLE orders
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n' 
+IGNORE 1 LINES 
+(order_id, customer_id, order_status, @v_order_purchase_timestamp, @v_order_approved_at, @v_order_estimated_delivery_date)
+SET 
+order_purchase_timestamp = STR_TO_DATE(@v_order_purchase_timestamp, '%m/%d/%Y %H:%i'),
+order_approved_at = STR_TO_DATE(@v_order_approved_at, '%m/%d/%Y %H:%i'),
+order_estimated_delivery_date = STR_TO_DATE(@v_order_estimated_delivery_date, '%m/%d/%Y %H:%i');
+
+
+DROP TABLE IF EXISTS product_category;
+
+-- creating ProductCategory table 
+CREATE TABLE product_category (
+	product_category_name VARCHAR(60) NULL,
+    product_category_name_english VARCHAR(60) NULL
+)  ENGINE = InnoDB DEFAULT CHARSET = UTF8MB4;
+
+
+-- loading CSV file into Orders table
+LOAD DATA INFILE 'c:/ProgramData/MySQL/MySQL Server 8.0/Uploads/product_category_name.csv' 
+INTO TABLE product_category
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n' 
+IGNORE 1 LINES 
+(product_category_name, product_category_name_english)

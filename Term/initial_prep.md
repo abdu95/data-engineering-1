@@ -64,7 +64,8 @@ nope
 yes
 
 remove quotes from CSV using bash command:
-    awk '{gsub(/\"/,"")};1' input.csv  
+    awk '{gsub(/\"/,"")};1' input.csv > output.csv
+
 
 
 Two columns of sellers table and "nove hamburgo" was with quotes. I opened CSV in Excel, removed commas from  "nove hamburgo" and quotes from two columns and from "nove hamburgo" was removed. 
@@ -96,6 +97,8 @@ Duplicate entry '00143d0f86d6fbd9f9b38ab440ac16f5' for key 'order_items.PRIMARY'
 
 Error Code: 1062. Duplicate entry '0008288aa423d2a3f00fcb17cd7d8719' for key 'order_items.PRIMARY'
 3 duplicates
+Error Code: 1062. Duplicate entry '001ab0a7578dd66cd4b0a71f5b6e1e41' for key 'order_items.PRIMARY'
+
 
 - How to find duplicates in order_id?
 - Iterate over each row in csv (112648 lines), compare the current value with previous value, if they are same, add to list. Then print this list: it will contain all duplicates
@@ -119,3 +122,32 @@ https://www.geeksforgeeks.org/python-pandas-dataframe-drop_duplicates/ Good idea
 
 
 https://docs.google.com/spreadsheets/d/1BpGoa1xFpWAqvowAf5QGdYEkCZfs-B47oVsN_zM3OhQ/edit#gid=0
+
+
+    SHOW ENGINE INNODB STATUS;
+shows lock unlock thread and some other unknown outputs related to MySQL inner work. 
+
+Error Code: 1366. Incorrect integer value: '' for column 'order_item_id' at row 98667
+
+Excel >> selec rows from 98666 until 12648 >> delete >> Entire row >> Save
+
+-- current directory
+select @@datadir;
+
+WARNING! 
+Timeout change maybe required to execute the SQL Query to load csv for olist_order_items table. 
+
+
+Error Code: 1264. Out of range value for column 'payment_value' at row 52108
+Therefore, 
+    payment_value DECIMAL(7,2) NOT NULL
+
+is used for table order_payments
+
+> order_payments table was created without PK. Why? Becuase csv contains duplicates. Is it necessary for this table to have PK? Is join with FK possible even without PK?
+
+Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails (`db_malikov_a`.`orders`, CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`))
+
+The reason is in quotations? I think yes. after removing quotes with awk, new Error appeared. 
+
+Error Code: 1292. Incorrect datetime value: '' for column 'order_delivered_carrier_date' at row 7
