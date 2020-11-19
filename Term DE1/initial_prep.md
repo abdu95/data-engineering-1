@@ -151,3 +151,12 @@ Error Code: 1452. Cannot add or update a child row: a foreign key constraint fai
 The reason is in quotations? I think yes. after removing quotes with awk, new Error appeared. 
 
 Error Code: 1292. Incorrect datetime value: '' for column 'order_delivered_carrier_date' at row 7
+
+
+1. Quantity 
+2. Analytics plan
+3. Data Mart
+4. Category English
+
+Quantity and Price giving Fact table. Fact table gives revenue: price*quantity
+What is your Fact table doing?
