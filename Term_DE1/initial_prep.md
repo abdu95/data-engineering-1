@@ -157,6 +157,7 @@ Error Code: 1292. Incorrect datetime value: '' for column 'order_delivered_carri
 2. Analytics plan
 3. Data Mart
 4. Category English
+5. Ensure that you copy CSV files from Uploads to dataset folder. After finishing the project, check your queries are getting CSV files from appropriate folder, tables are populated and queries are working without Errors
 
 Quantity and Price giving Fact table. Fact table gives revenue: price*quantity
 What is your Fact table doing?
