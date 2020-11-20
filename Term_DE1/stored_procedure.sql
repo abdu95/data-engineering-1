@@ -12,7 +12,7 @@ BEGIN
 	   order_items.order_id AS TransactionId, 
 	   order_payments.payment_value AS Paid_Amount,
        products.product_id AS Product,
-	   products.product_category_english AS Category,   
+	   products.product_category_name AS Category,   
 	   customers.customer_city AS Customers_City,
 	   customers.customer_state AS Customers_State,   
 	   orders.order_approved_at AS Ordered_Date,

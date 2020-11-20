@@ -1,9 +1,8 @@
 SELECT * FROM db_malikov_a.product_sales;
 
--- SELECT * FROM db_malikov_a.product_sales where TransactionId = '00143d0f86d6fbd9f9b38ab440ac16f5' ;
 SELECT DISTINCT Category FROM product_sales;
 select * from product_sales where Paid_Amount > 100;
-select * from product_sales where Category = 'cool_stuff';
+select * from product_sales where Category = 'perfumaria';
 
 DROP VIEW IF EXISTS perfume_products;
 
