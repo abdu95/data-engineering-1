@@ -24,14 +24,3 @@ DROP VIEW IF EXISTS sales_2017;
 
 CREATE VIEW `sales_2017` AS
 SELECT * FROM db_malikov_a.product_sales WHERE YEAR(Ordered_Date) = 2017;
-
-SELECT DISTINCT Category FROM product_sales;
-select * from product_sales where Paid_Amount > 100;
-
-
--- To which category belongs the sales with the highest Paid_Amount?
--- From which Customers_City the highest sales are made? Which city is mentioned most? and least?
--- Which Product sold most? Which product brought highest sales?
--- Which Customer bought most items? Which customer made most expensive purchases?
--- In which day the highest amount of sales made? (Which days mentioned most frequently?)
--- Which weeks had highest sales?

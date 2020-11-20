@@ -43,6 +43,9 @@ Create an ETL pipeline using Triggers, Stored procedures. Make sure to demonstra
 ## DATA MART
 Create Views as data marts.
 
+VIEW `perfume_products`
+VIEW `rio_sales`
+VIEW `sales_2017`
 
 ## REPRODUCE 
 It is recommended to use CSV files in `dataset` folder (not original dataset from website). The original dataset contained quotes in some columns and therefore original dataset of CSV files were modified slightly in order to smoothly work with MySQL commands.
