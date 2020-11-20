@@ -65,7 +65,7 @@ The questions that were listed in ANALYTICS PLAN section were answered using thi
 
 
 ## REPRODUCE 
-It is recommended to use CSV files in `dataset` folder (not original dataset from website). The original dataset contained quotes in some columns and therefore original dataset of CSV files were modified slightly in order to smoothly work with MySQL commands.
+It is recommended to use CSV files in `dataset` folder (not original dataset from website). The original dataset contained quotes in some columns and therefore original dataset of CSV files were modified slightly in order to smoothly work with MySQL commands. This and other data cleaning operations are described in `data_cleaning.md` document file
 
 Order of execution of sql queries and their purpose:
 
