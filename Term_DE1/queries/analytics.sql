@@ -51,14 +51,14 @@ FROM product_sales
 GROUP BY Customers_City 
 ORDER BY Maximum_Paid DESC;
 
--- how many rows?
+-- How many rows?
 SELECT count(*) FROM product_sales;
 
 -- How many days are covered within this product_sales table? 
 SELECT DATEDIFF(MAX(Ordered_Date),'2016-10-04 09:43:00') from product_sales;
 
--- Count number of distinct states
-SELECT COUNT(DISTINCT(state)) FROM birdstrikes;
+-- Count number of distinct customers city
+SELECT COUNT(DISTINCT(Customers_City)) FROM product_sales;
 
 -- This code defines GetOrderByCity Stored Procedure
 DROP PROCEDURE IF EXISTS GetOrderByCity;
@@ -103,7 +103,7 @@ SET @total = 0;
 -- and assigns this value to variable @total 
 CALL GetOrderAmountsByCity('salvador', @total);
 SELECT @total;
--- There are 4020 orders made by customers from 'salvador' city
+-- Number of orders made by customers from 'salvador' city: value of @total
 
 
 -- This code defines GetPaidAmountByCity Stored Procedure

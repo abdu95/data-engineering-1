@@ -165,7 +165,7 @@ CREATE TABLE product_category (
 )  ENGINE = InnoDB DEFAULT CHARSET = UTF8MB4;
 
 
--- loading CSV file into Orders table
+-- loading CSV file into ProductCategory table
 LOAD DATA INFILE 'c:/ProgramData/MySQL/MySQL Server 8.0/Uploads/product_category_name.csv' 
 INTO TABLE product_category
 FIELDS TERMINATED BY ',' 

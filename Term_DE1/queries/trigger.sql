@@ -1,6 +1,8 @@
 USE db_malikov_a;
 
 -- This table logs all triggers
+DROP TABLE IF EXISTS log_orders;
+
 CREATE TABLE log_orders (order_id VARCHAR(60) NULL, date_time DATETIME NULL);
 
 -- This code defines trigger. Trigger works when new entry added to order_items table
