@@ -1,11 +1,14 @@
 SELECT * FROM db_malikov_a.product_sales;
 
 -- SELECT * FROM db_malikov_a.product_sales where TransactionId = '00143d0f86d6fbd9f9b38ab440ac16f5' ;
+SELECT DISTINCT Category FROM product_sales;
+select * from product_sales where Paid_Amount > 100;
+select * from product_sales where Category = 'cool_stuff';
 
-DROP VIEW IF EXISTS Perfume_Products;
+DROP VIEW IF EXISTS perfume_products;
 
-CREATE VIEW `Perfume_Products` AS
-SELECT * FROM db_malikov_a.product_sales where Category = 'perfumaria';
+CREATE VIEW `perfume_products` AS
+SELECT * FROM db_malikov_a.product_sales where Category = 'telephony';
 
 DROP VIEW IF EXISTS Rio_Sales;
 
@@ -24,4 +27,24 @@ FROM products
 INNER JOIN product_category  
 ON products.product_category_name = product_category.product_category_name;
 
-
+SELECT 
+   order_items.order_id AS TransactionId, 
+   order_payments.payment_value AS Paid_Amount,
+   products.product_id AS Product,
+   product_category.product_category_name_english AS Category,   
+   customers.customer_city AS Customers_City,
+   customers.customer_state AS Customers_State,   
+   orders.order_approved_at AS Ordered_Date,
+   WEEK(orders.order_approved_at) AS WeekOfYear
+FROM
+	orders
+INNER JOIN
+	order_items USING (order_id)
+INNER JOIN
+	order_payments USING (order_id)
+INNER JOIN
+	products USING (product_id)
+INNER JOIN 
+	product_category USING (product_category_name)
+INNER JOIN
+	customers USING (customer_id);

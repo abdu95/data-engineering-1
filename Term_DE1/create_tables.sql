@@ -171,4 +171,17 @@ INTO TABLE product_category
 FIELDS TERMINATED BY ',' 
 LINES TERMINATED BY '\n' 
 IGNORE 1 LINES 
-(product_category_name, product_category_name_english)
+(product_category_name, product_category_name_english);
+
+-- ALTER TABLE products DROP COLUMN product_category_english;
+-- adding a column to Products table
+ALTER TABLE products ADD COLUMN product_category_english VARCHAR(60) NULL DEFAULT NULL;
+
+-- Inserting English category names to Products table
+UPDATE
+  products t1
+  INNER JOIN product_category t2 ON t2.product_category_name = t1.product_category_name
+SET
+  t1.product_category_english = t2.product_category_name_english
+WHERE
+  t1.product_category_name = t2.product_category_name;

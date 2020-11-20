@@ -138,6 +138,7 @@ WARNING!
 Timeout change maybe required to execute the SQL Query to load csv for olist_order_items table. 
 
 
+
 Error Code: 1264. Out of range value for column 'payment_value' at row 52108
 Therefore, 
     payment_value DECIMAL(7,2) NOT NULL
