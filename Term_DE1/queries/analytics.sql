@@ -42,7 +42,7 @@ SELECT SUM(Paid_Amount) FROM product_sales;
 -- Answer: 47538840.51
 
 -- What is the average (mean) of Paid Amount of all orders?
-SELECT AVG(Paid_Amount) FROM product_sales;
+SELECT AVG(Paid_Amount) AS Average_Paid_Amount FROM product_sales;
 -- Answer: 153.76
 
 -- Orders with maximum Paid Amount grouped by cities and ordered by Paid Amount in descending order
@@ -54,36 +54,56 @@ ORDER BY Maximum_Paid DESC;
 -- how many rows?
 SELECT count(*) FROM product_sales;
 
--- How many observation days we have in product_sales
+-- How many days are covered within this product_sales table? 
 SELECT DATEDIFF(MAX(Ordered_Date),'2016-10-04 09:43:00') from product_sales;
-
-
-SELECT (MAX(Ordered_Date)) FROM product_sales;
-SELECT (MIN(Ordered_Date)) FROM product_sales;
-SELECT * FROM product_sales ORDER BY Ordered_Date ASC LIMIT 100;
-
-SELECT DISTINCT Category FROM product_sales;
-select * from product_sales where Paid_Amount > 100;
-
-
--- To which category belongs the sales with the highest Paid_Amount?
--- From which Customers_City the highest sales are made? Which city is mentioned most? and least?
--- Which Product sold most? Which product brought highest sales?
--- Which Customer bought most items? Which customer made most expensive purchases?
--- In which day the highest amount of sales made? (Which days mentioned most frequently?)
--- Which weeks had highest sales?
-
-SELECT * FROM product_sales;
-SELECT DISTINCT Customers_City, Category FROM product_sales;
-
-
--- ROUND, SQRT
-SELECT ROUND(SQRT(speed/2) * 10) AS synthetic_speed FROM birdstrikes;
-
 
 -- Count number of distinct states
 SELECT COUNT(DISTINCT(state)) FROM birdstrikes;
 
+-- This code defines GetOrderByCity Stored Procedure
+DROP PROCEDURE IF EXISTS GetOrderByCity;
+
+DELIMITER //
+
+CREATE PROCEDURE GetOrderByCity(
+	IN cityName VARCHAR(255)
+)
+BEGIN
+	SELECT * 
+ 		FROM product_sales
+			WHERE Customers_City = cityName;
+END //
+DELIMITER ;
+
+-- This Stored Procedure can be called by passing any city name 
+-- Then this SP returns orders made by customers from that indicated city
+CALL GetOrderByCity('sao paulo');
 
 
+-- This code defines GetOrderAmountsByCity Stored Procedure
+DROP PROCEDURE IF EXISTS GetOrderAmountsByCity;
 
+DELIMITER $$
+
+CREATE PROCEDURE GetOrderAmountsByCity (
+	IN  cityName VARCHAR(25),
+	OUT total INT
+)
+BEGIN
+	SELECT COUNT(TransactionId)
+	INTO total
+	FROM product_sales
+	WHERE Customers_City = cityName;
+END$$
+DELIMITER ;
+
+SET @total = 0;
+-- This Stored Procedure can be called by passing any city name and @total variable
+-- Then this SP returns how many orders were made by customers from that indicated city 
+-- and assigns this value to variable @total 
+CALL GetOrderAmountsByCity('salvador', @total);
+SELECT @total;
+-- There are 4020 orders made by customers from 'salvador' city
+
+-- GetPaidAmountByCity
+select sum(Paid_Amount) from product_sales where Customers_City = 'sao paulo';
