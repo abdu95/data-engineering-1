@@ -158,7 +158,21 @@ Error Code: 1292. Incorrect datetime value: '' for column 'order_delivered_carri
 2. Analytics plan
 3. Data Mart
 4. Category English
-5. Ensure that you copy CSV files from Uploads to dataset folder. After finishing the project, check your queries are getting CSV files from appropriate folder, tables are populated and queries are working without Errors
+5. grouping by price using if. Save this as analytics.sql
+6. Ensure that you copy CSV files from Uploads to dataset folder. After finishing the project, check your queries are getting CSV files from appropriate folder, tables are populated and queries are working without Errors
 
 Quantity and Price giving Fact table. Fact table gives revenue: price*quantity
 What is your Fact table doing?
+
+
+Should Trigger when Insert Into order_items? (because of TransactionID)
+
+If you Insert Into order_items, then you should Insert Into order_payments as well, becuase of payment_value
+
+While Inserting Into order_items, use existing product_id & product_category_name
+existing seller_id
+
+Then, Insert Into orders, use
+existing customer_id
+
+
