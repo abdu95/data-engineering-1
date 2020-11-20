@@ -105,5 +105,26 @@ CALL GetOrderAmountsByCity('salvador', @total);
 SELECT @total;
 -- There are 4020 orders made by customers from 'salvador' city
 
--- GetPaidAmountByCity
-select sum(Paid_Amount) from product_sales where Customers_City = 'sao paulo';
+
+-- This code defines GetPaidAmountByCity Stored Procedure
+DROP PROCEDURE IF EXISTS GetPaidAmountByCity;
+
+DELIMITER //
+
+CREATE PROCEDURE GetPaidAmountByCity(
+	IN cityName VARCHAR(255),
+    OUT total INT
+)
+BEGIN
+	SELECT sum(Paid_Amount) 
+    INTO total 
+    FROM product_sales 
+    WHERE Customers_City = cityName;
+END //
+DELIMITER ;
+
+-- This Stored Procedure can be called by passing any city name 
+-- Then this SP returns SUM of Paid Amount for that indicated city
+SET @total = 0;
+CALL GetPaidAmountByCity('rio de janeiro', @total);
+SELECT @total;
