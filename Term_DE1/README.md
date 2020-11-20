@@ -30,6 +30,12 @@ Create a short plan of what kind of analytics can be potentially executed on thi
 
 Design a denormalized data structure using the operational layer. Create table in MySQL for this structure.
 `product_sales` table
+Fact 
+Sales Fact - TransactionId (order_id)
+Dimensions
+Product Dimension: Product ID and Product Category
+Market Dimension: Customer's City and Customer's State
+Date Dimension: Ordered Date and Week of Year of that order.
 
 ## ETL PIPELINE
 Create an ETL pipeline using Triggers, Stored procedures. Make sure to demonstrate every element of ETL (Extract, Transform, Load)
@@ -46,12 +52,14 @@ Order of execution of sql queries and their purpose:
 1. `create_tables.sql` - creates tables and loads data from CSV files to these tables. Operational Layer
 2. `stored_procedure.sql` - defines and calls Stored Procedure named `create_product_sales`. This SP creates `product_sales` table for Analytical Layer
 3. `data_mart.sql` - creates Views that functions as a Data Mart for a BI operations such as reporting.
+4. `trigger.sql`
 
 Order of execution of sql queries:
 
 1. `create_tables.sql`
 2. `stored_procedure.sql`
 3. `data_mart.sql`
+4. `trigger.sql`
 
 ### SQL Settings:
 

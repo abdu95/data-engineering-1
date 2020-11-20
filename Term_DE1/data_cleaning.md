@@ -25,3 +25,12 @@ All the tables should be created using same charset. Otherwise, there will be in
 Remove duplicate keys
 
 112648 lines
+
+### 6
+
+The following code helped to get English name for Categories in products table. But when product_sales table created, View does not show anything when Category column selected. That's why, it is decided to leave Brazilian names for the Category column.
+
+    SELECT product_category_name_english 
+    FROM products 
+    INNER JOIN product_category  
+    ON products.product_category_name = product_category.product_category_name;

@@ -165,14 +165,12 @@ Quantity and Price giving Fact table. Fact table gives revenue: price*quantity
 What is your Fact table doing?
 
 
-Should Trigger when Insert Into order_items? (because of TransactionID)
+Trigger works when new row inserted into order_items table (because of TransactionId)
 
-If you Insert Into order_items, then you should Insert Into order_payments as well, becuase of payment_value
+If you Insert Into order_items, then you should Insert Into order_payments as well, because of payment_value
 
-While Inserting Into order_items, use existing product_id & product_category_name
-existing seller_id
+While Inserting Into order_items, use existing product_id & existing seller_id
 
-Then, Insert Into orders, use
-existing customer_id
+Then, Insert Into orders, use existing customer_id
 
 

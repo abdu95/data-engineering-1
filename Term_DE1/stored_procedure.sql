@@ -1,3 +1,7 @@
+USE db_malikov_a;
+
+-- Below code defines and calls Stored Procedure named `create_product_sales`. 
+-- This SP creates `product_sales` table for Analytical Layer
 DROP PROCEDURE IF EXISTS create_product_sales;
 
 DELIMITER //
